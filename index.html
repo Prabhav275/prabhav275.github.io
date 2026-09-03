@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prabhav Pandey</title>
+<meta name="description" content="Portfolio of Prabhav Pandey — data engineer & Flutter developer building fast, expressive apps and data-driven products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens ============ */
+:root{
+  --bg:#F2EFE7;
+  --bg-soft:#EBE7DB;
+  --card:#ECE8DD;
+  --ink:#191713;
+  --muted:#655F53;
+  --line:rgba(25,23,19,.13);
+  --accent:#A3741F;
+  --accent-strong:#6E4E0E;
+  --glow:rgba(163,116,31,.15);
+  --grain-op:.4;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0B0D;
+    --bg-soft:#111114;
+    --card:#151519;
+    --ink:#F2EFE8;
+    --muted:#8F8A81;
+    --line:rgba(242,239,232,.10);
+    --accent:#D8A657;
+    --accent-strong:#E3B76F;
+    --glow:rgba(216,166,87,.17);
+    --grain-op:.55;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0B0D;
+  --bg-soft:#111114;
+  --card:#151519;
+  --ink:#F2EFE8;
+  --muted:#8F8A81;
+  --line:rgba(242,239,232,.10);
+  --accent:#D8A657;
+  --accent-strong:#E3B76F;
+  --glow:rgba(216,166,87,.17);
+  --grain-op:.55;
+}
+
+/* ============ base ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;
+  font-family:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.6;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:var(--accent);color:var(--bg)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ============ bg code-token field ============ */
+#bgCanvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:1;pointer-events:none;opacity:.9}
+main,footer{position:relative;z-index:2}
+@media (prefers-reduced-motion:reduce){#bgCanvas{display:none}}
+
+/* grain — subtle, classy texture */
+body::after{
+  content:"";position:fixed;inset:0;z-index:60;pointer-events:none;
+  opacity:var(--grain-op);
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+section{scroll-margin-top:88px}
+
+/* ============ type helpers ============ */
+.label{
+  font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+.sec-title{display:inline;font-size:.72rem;letter-spacing:.14em;font-weight:500;margin:0}
+.h-display{font-family:"Syne",sans-serif;font-weight:800;letter-spacing:-.02em;line-height:.98;text-wrap:balance}
+h2.h-display{font-size:clamp(1.9rem,4.6vw,3.3rem);margin:0}
+.tabnum{font-variant-numeric:tabular-nums}
+
+/* ============ nav ============ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  transition:background .4s ease,border-color .4s ease,backdrop-filter .4s ease;
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  background:color-mix(in srgb,var(--bg) 80%,transparent);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{font-family:"Syne",sans-serif;font-weight:800;font-size:1.02rem;letter-spacing:-.01em;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.brand-mark{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;box-shadow:0 0 14px var(--glow)}
+.nav-links{display:flex;align-items:center;gap:clamp(14px,2.4vw,34px)}
+.nav-links a{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s ease}
+.nav-links a:hover{color:var(--ink)}
+.theme-btn{
+  font:500 .95rem/1 "JetBrains Mono",monospace;color:var(--ink);
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .3s ease,background .3s ease;
+}
+.theme-btn:hover{border-color:var(--accent);background:var(--bg-soft)}
+.theme-btn .icon-moon{display:none}
+:root[data-theme="dark"] .theme-btn .icon-sun{display:none}
+:root[data-theme="dark"] .theme-btn .icon-moon{display:inline}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .theme-btn .icon-sun{display:none}
+  :root:not([data-theme="light"]) .theme-btn .icon-moon{display:inline}
+}
+
+/* ============ hero ============ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:64px;overflow:hidden}
+.hero-glow{
+  position:absolute;inset:-24% -12% auto -12%;height:130%;
+  background:radial-gradient(55% 48% at 50% 38%,var(--glow),transparent 70%);
+  pointer-events:none;
+}
+.hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(28px,5vh,56px)}
+.hero-name{
+  font-family:"Syne",sans-serif;font-weight:800;
+  font-size:clamp(2.2rem,8vw,6.4rem);
+  line-height:1;letter-spacing:-.03em;margin:0 0 clamp(20px,3.5vh,36px);
+  display:flex;flex-wrap:nowrap;white-space:nowrap;align-items:baseline;
+}
+.split-mask{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.2em;margin-bottom:-.14em;line-height:1.1}
+.split-char{display:inline-block;transform:translateY(118%);transition:transform .9s cubic-bezier(.19,1,.22,1)}
+.hero.in .split-char{transform:translateY(0)}
+.hero-sub{max-width:560px;font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--muted)}
+.hero-sub em{font-style:italic;color:var(--ink)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:clamp(28px,4.5vh,48px)}
+.meta-item{display:inline-flex;align-items:center;gap:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;
+  animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--glow)}50%{opacity:.45;box-shadow:0 0 0 7px transparent}}
+.hero-scroll{position:absolute;left:clamp(20px,5vw,48px);bottom:26px;display:inline-flex;align-items:center;gap:10px;color:var(--muted)}
+.hero-scroll .line{width:44px;height:1px;background:var(--line);overflow:hidden;position:relative}
+.hero-scroll .line::after{content:"";position:absolute;inset:0;background:var(--accent);transform:translateX(-100%);animation:sweep 2.2s ease-in-out infinite}
+@keyframes sweep{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+.js .hero .fade{opacity:0;transform:translateY(16px);transition:opacity .9s ease,transform .9s cubic-bezier(.19,1,.22,1)}
+.js .hero.in .fade{opacity:1;transform:none}
+
+/* ============ sections ============ */
+.section{padding:clamp(72px,11vh,130px) 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:clamp(28px,5vh,52px)}
+.sec-note{color:var(--muted);max-width:420px;text-align:right}
+
+/* ============ about ============ */
+.statement{
+  font-family:"Syne",sans-serif;font-weight:700;letter-spacing:-.015em;
+  font-size:clamp(1.5rem,3.4vw,2.7rem);line-height:1.24;
+  max-width:26ch;margin:0 0 clamp(28px,6vh,52px);
+}
+.statement em{font-style:italic;color:var(--accent);font-weight:600}
+.about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(24px,4vw,64px)}
+.about-copy p{color:var(--muted);max-width:60ch}
+.about-copy p strong{color:var(--ink);font-weight:500}
+.edu{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);padding:5px 12px;border-radius:999px}
+
+/* ============ experience ============ */
+.exp{border-top:1px solid var(--line)}
+.exp:last-of-type{border-bottom:1px solid var(--line)}
+.exp-card{padding:clamp(22px,3.5vh,34px) 10px;display:grid;gap:10px;transition:background .45s ease,padding .45s cubic-bezier(.19,1,.22,1)}
+.exp-card:hover{background:var(--bg-soft);padding-left:24px}
+.exp-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.exp-role{font-family:"Syne",sans-serif;font-weight:700;letter-spacing:-.01em;font-size:clamp(1.15rem,2.2vw,1.55rem);line-height:1;margin:0}
+.exp-org{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.04em;color:var(--accent)}
+.exp-meta{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.exp-list{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.exp-list li{position:relative;padding-left:20px;color:var(--muted);font-size:.95rem;max-width:72ch}
+.exp-list li::before{content:"→";position:absolute;left:0;top:0;color:var(--accent);font-size:.85em}
+
+/* ============ education ============ */
+.edu-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:clamp(18px,3vh,28px) 10px;border-top:1px solid var(--line);transition:background .45s ease,padding .45s cubic-bezier(.19,1,.22,1)}
+.edu-row:hover{background:var(--bg-soft);padding-left:24px}
+.edu-row:last-of-type{border-bottom:1px solid var(--line)}
+.edu-deg{font-family:"Syne",sans-serif;font-weight:700;letter-spacing:-.01em;font-size:clamp(1rem,1.8vw,1.25rem);line-height:1.2;margin:0 0 4px}
+
+/* ============ achievements ============ */
+.achieve-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.5vw,28px)}
+.achieve-card{border:1px solid var(--line);border-radius:16px;padding:clamp(24px,4vh,40px) clamp(20px,3vw,36px);background:var(--card);transition:transform .4s cubic-bezier(.19,1,.22,1),border-color .4s ease}
+.achieve-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.achieve-num{display:block;font-family:"Syne",sans-serif;font-weight:800;font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1;letter-spacing:-.02em;color:var(--accent);margin-bottom:14px}
+.achieve-label{margin:0;color:var(--muted);font-size:.95rem}
+.achieve-label em{color:var(--ink);font-style:italic;font-weight:500}
+
+/* ============ skills ============ */
+.skill-group{margin-bottom:clamp(30px,5vh,44px)}
+.skill-group:last-child{margin-bottom:0}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:14px}
+.skill{
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  padding:18px 8px 13px;border:1px solid var(--line);border-radius:var(--radius,14px);
+  background:var(--card);transition:transform .35s cubic-bezier(.19,1,.22,1),border-color .35s ease;
+}
+.skill:hover{transform:translateY(-4px);border-color:var(--accent)}
+.skill-badge{
+  width:46px;height:46px;border-radius:12px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Syne",sans-serif;font-weight:800;font-size:13px;letter-spacing:-.01em;
+  background:var(--sbg,#000);color:var(--sfg,#fff);
+  box-shadow:0 6px 16px -8px rgba(0,0,0,.35);
+}
+.skill-badge svg{width:26px;height:26px;display:block}
+.skill-name{font-family:"JetBrains Mono",monospace;font-size:.62rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.2}
+
+/* ============ projects ============ */
+.proj{border-top:1px solid var(--line)}
+.proj:last-of-type{border-bottom:1px solid var(--line)}
+.proj-card{padding:clamp(24px,4vh,38px) 10px;transition:background .45s ease,padding .45s cubic-bezier(.19,1,.22,1)}
+.proj-card:hover{background:var(--bg-soft);padding-left:24px}
+.proj-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.proj-title{font-family:"Syne",sans-serif;font-weight:800;letter-spacing:-.02em;font-size:clamp(1.45rem,2.8vw,2.1rem);line-height:1;margin:0;transition:transform .5s cubic-bezier(.19,1,.22,1)}
+.proj:hover .proj-title{transform:translateX(10px)}
+.proj-meta{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.proj-desc{color:var(--muted);max-width:64ch;margin:14px 0 0}
+.proj-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tag{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.05em;color:var(--muted);border:1px solid var(--line);padding:4px 11px;border-radius:999px;transition:color .3s ease,border-color .3s ease}
+.proj:hover .tag{color:var(--ink);border-color:color-mix(in srgb,var(--line) 60%,var(--accent))}
+
+/* ============ contact ============ */
+.contact-big{
+  font-family:"Syne",sans-serif;font-weight:800;letter-spacing:-.025em;
+  font-size:clamp(2.2rem,7vw,5.2rem);line-height:1.02;margin:0 0 clamp(24px,5vh,40px);
+}
+.contact-big em{font-style:italic;font-weight:600;color:var(--accent)}
+.contact-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.contact-cta{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:"Syne",sans-serif;font-weight:700;font-size:1rem;letter-spacing:.01em;
+  color:var(--bg);background:var(--ink);text-decoration:none;
+  padding:18px 32px;border-radius:999px;
+  transition:background .35s ease,transform .35s cubic-bezier(.19,1,.22,1),box-shadow .35s ease;
+}
+.contact-cta:hover{background:var(--accent-strong);transform:translateY(-2px);box-shadow:0 16px 34px -16px var(--glow)}
+.contact-cta .arr{transition:transform .35s ease}
+.contact-cta:hover .arr{transform:translateX(5px)}
+.contact-tel{
+  font-family:"JetBrains Mono",monospace;font-size:.8rem;letter-spacing:.04em;color:var(--muted);
+  text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:16px 26px;
+  transition:color .3s ease,border-color .3s ease;
+}
+.contact-tel:hover{color:var(--accent);border-color:var(--accent)}
+.socials{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:clamp(32px,6vh,52px)}
+.socials a{font-family:"JetBrains Mono",monospace;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s ease}
+.socials a:hover{color:var(--accent)}
+
+/* ============ footer ============ */
+footer{border-top:1px solid var(--line)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:26px 0;flex-wrap:wrap}
+.foot p{margin:0;font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.06em;color:var(--muted)}
+.back-top{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s ease}
+.back-top:hover{color:var(--accent)}
+
+/* ============ scroll reveal ============ */
+.js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .9s cubic-bezier(.19,1,.22,1)}
+.js [data-reveal].in{opacity:1;transform:none}
+
+/* ============ reduced motion ============ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .split-char{transform:none!important}
+  .js .hero .fade,.js [data-reveal]{opacity:1!important;transform:none!important}
+}
+
+/* ============ responsive ============ */
+@media (max-width:760px){
+  .about-grid{grid-template-columns:1fr}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .sec-note{text-align:left}
+  .nav-links .hide-m{display:none}
+  .hero-name{font-size:clamp(1.9rem,9.5vw,3.4rem)}
+  .skill-grid{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+<header id="siteHeader">
+  <div class="wrap nav">
+    <a class="brand" href="#top"><span class="brand-mark"></span>Prabhav</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="hide-m" href="#about">About</a>
+      <a class="hide-m" href="#experience">Experience</a>
+      <a class="hide-m" href="#skills">Skills</a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Contact</a>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle colour theme">
+        <span class="icon-sun" aria-hidden="true">☀</span>
+        <span class="icon-moon" aria-hidden="true">☾</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-top">
+        <span class="label">Portfolio — 2026</span>
+        <span class="label">Greater Noida, India</span>
+      </div>
+      <h1 class="hero-name" id="heroName" data-text="Prabhav Pandey">Prabhav Pandey</h1>
+      <p class="hero-sub fade">
+        Data engineer &amp; <em>Flutter developer</em> — building fast, expressive apps
+        and data-driven products that scale.
+      </p>
+      <div class="hero-meta fade">
+        <span class="meta-item label"><span class="dot" aria-hidden="true"></span>Currently — Open to work</span>
+        <span class="meta-item label tabnum">Status — Available</span>
+      </div>
+    </div>
+    <div class="hero-scroll fade" aria-hidden="true">
+      <span class="line"></span>
+      <span class="label">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">01 / About</span>
+        <span class="label sec-note">Engineer · Developer</span>
+      </div>
+      <h2 class="statement" data-reveal>
+        I ship <em>apps</em> and <em>data pipelines</em> — clean code, real
+        performance, no shortcuts.
+      </h2>
+      <div class="about-grid">
+        <div class="about-copy" data-reveal>
+          <p>
+            I'm Prabhav, a software engineer with an MTech in Software Engineering and a
+            BTech in CSE from Gautam Buddha University. As a <strong>data engineer at Bluecopa</strong>,
+            I've optimized SQL workflows for large-scale analytics; as an <strong>app developer</strong>,
+            I've built Flutter applications end-to-end — from state management to Firebase
+            backends.
+          </p>
+          <div class="edu">
+            <span class="chip">M.Tech · Software Engineering</span>
+            <span class="chip">B.Tech · Computer Science</span>
+            <span class="chip">150+ DSA problems solved</span>
+            <span class="chip">Research paper · ML defect prediction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="label sec-title">02 / Experience</h2>
+        <span class="label sec-note">Roles &amp; contributions</span>
+      </div>
+
+      <div class="exp" data-reveal>
+        <div class="exp-card">
+          <div class="exp-top">
+            <h3 class="exp-role">Data Engineer</h3>
+            <span class="exp-meta">Nov 2025 — Dec 2025</span>
+          </div>
+          <div class="exp-org">Bluecopa · Gurugram</div>
+          <ul class="exp-list">
+            <li>Developed and optimized SQL-based data processing workflows, improving query execution efficiency for scalable, data-driven applications.</li>
+            <li>Collaborated with cross-functional teams to understand data requirements and support analytics &amp; business use cases.</li>
+            <li>Performed data cleaning and consistency checks to ensure high-quality datasets for downstream processing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp" data-reveal>
+        <div class="exp-card">
+          <div class="exp-top">
+            <h3 class="exp-role">App Developer Intern</h3>
+            <span class="exp-meta">Jul 2023 — Sep 2023</span>
+          </div>
+          <div class="exp-org">Yhills Edutech Pvt. Ltd · Remote</div>
+          <ul class="exp-list">
+            <li>Designed and developed a feature-rich shopping list application independently, ensuring scalability and optimal performance.</li>
+            <li>Built user-centric features such as item categorization and automated reminders, enhancing task completion efficiency by 35%.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ EDUCATION ============ -->
+  <section class="section" id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="label sec-title">03 / Education</h2>
+        <span class="label sec-note">Academics</span>
+      </div>
+      <div class="edu-row" data-reveal>
+        <div>
+          <h3 class="edu-deg">M.Tech · Software Engineering</h3>
+          <div class="exp-org">Gautam Buddha University · Greater Noida</div>
+        </div>
+        <span class="exp-meta">2024 — 2025</span>
+      </div>
+      <div class="edu-row" data-reveal>
+        <div>
+          <h3 class="edu-deg">B.Tech · Computer Science &amp; Engineering</h3>
+          <div class="exp-org">Gautam Buddha University · Greater Noida</div>
+        </div>
+        <span class="exp-meta">2020 — 2024</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="label sec-title">04 / Skills</h2>
+        <span class="label sec-note">Technologies I work with</span>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="label" style="display:block;margin-bottom:16px">Languages</span>
+        <div class="skill-grid">
+          <div class="skill"><span class="skill-badge" style="--sbg:#00599C">C++</span><span class="skill-name">C++</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#3776AB">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3 C5 3 4 5 4 7 V10 C4 12 5 14 8 14 H10 C13 14 14 16 14 18 V20" stroke="#FFD43B" stroke-width="2.2" stroke-linecap="round"/><path d="M16 21 C19 21 20 19 20 17 V14 C20 12 19 10 16 10 H14 C11 10 10 8 10 6 V4" stroke="#FFD43B" stroke-width="2.2" stroke-linecap="round"/><circle cx="7" cy="6.5" r="1.2" fill="#FFD43B"/><circle cx="17" cy="17.5" r="1.2" fill="#FFD43B"/></svg>
+          </span><span class="skill-name">Python</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#ED8B00">Java</span><span class="skill-name">Java</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#E38C00">SQL</span><span class="skill-name">SQL</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#0175C2">D</span><span class="skill-name">Dart</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#F7DF1E;--sfg:#0B0B0D">JS</span><span class="skill-name">JavaScript</span></div>
+        </div>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="label" style="display:block;margin-bottom:16px">Frameworks</span>
+        <div class="skill-grid">
+          <div class="skill"><span class="skill-badge" style="--sbg:#02569B">
+            <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M4 3 L4 21 L9 16 L9 8 L16 1 Z"/><path d="M9 8 L9 13 L13 17 L16 17 L20 13 L20 8 Z" opacity=".55"/></svg>
+          </span><span class="skill-name">Flutter</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#000;--sfg:#fff">N&nbsp;▲</span><span class="skill-name">Next.js</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#61DAFB;--sfg:#0B0B0D">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="10.5" ry="4.2"/><ellipse cx="12" cy="12" rx="10.5" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10.5" ry="4.2" transform="rotate(120 12 12)"/></svg>
+          </span><span class="skill-name">React</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#6DB33F">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 14 C4 8 8 4 14 4 C19 4 22 7 22 11 C22 15 18 18 13 18 C10 18 8 17 7 15"/><path d="M5 20 C3 16 6 12 10 12 C14 12 15 15 13 17"/></svg>
+          </span><span class="skill-name">Spring Boot</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#FF6C37">API</span><span class="skill-name">REST API</span></div>
+        </div>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="label" style="display:block;margin-bottom:16px">Tools &amp; Platforms</span>
+        <div class="skill-grid">
+          <div class="skill"><span class="skill-badge" style="--sbg:#181717">
+            <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05.8-.23 1.65-.34 2.5-.34.85 0 1.7.11 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.59.69.49A10.25 10.25 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+          </span><span class="skill-name">GitHub</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#F05032">
+            <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="6" cy="20" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 6 v12" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M8.2 6.4 C10 7 17 8.2 17 7" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M8.2 17.6 C10 17 17 15.8 17 9" stroke="#fff" stroke-width="1.6" fill="none"/></svg>
+          </span><span class="skill-name">Git</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#FFCA28;--sfg:#0B0B0D">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 C10 5 8.2 7.6 8.2 10.2 C8.2 12.2 9.2 13.2 9.2 13.2 C9.2 9.7 11 7.4 13 4.6 C13 6.6 14.8 8.4 14.8 10.4 C15.6 9.6 16 8.6 16 8.6 C17.8 12.4 19.4 14.6 19.4 16.8 C19.4 20.6 16.2 22 12 22 C7.8 22 4.6 20.6 4.6 16.8 C4.6 12 7.2 8 12 2 Z"/></svg>
+          </span><span class="skill-name">Firebase</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#3DDC84;--sfg:#0B0B0D">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="7" width="10" height="9" rx="4.5"/><path d="M4 9 h2 v6 h-2 Z M18 9 h2 v6 h-2 Z"/><circle cx="9.5" cy="6" r="1.3"/><circle cx="14.5" cy="6" r="1.3"/></svg>
+          </span><span class="skill-name">Android Studio</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#C71A36">Mv</span><span class="skill-name">Maven</span></div>
+        </div>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="label" style="display:block;margin-bottom:16px">Databases</span>
+        <div class="skill-grid">
+          <div class="skill"><span class="skill-badge" style="--sbg:#336791">Pg</span><span class="skill-name">PostgreSQL</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#47A248">
+            <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 1.5 C12 8 8.5 12 6 18 C8 19 10 20 12 22.5 C14 20 16 19 18 18 C15.5 12 12 8 12 1.5 Z"/></svg>
+          </span><span class="skill-name">MongoDB</span></div>
+          <div class="skill"><span class="skill-badge" style="--sbg:#4479A1">My</span><span class="skill-name">MySQL</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="label sec-title">05 / Projects</h2>
+        <span class="label sec-note">Selected work — full stack &amp; mobile</span>
+      </div>
+
+      <div class="proj" data-reveal>
+        <div class="proj-card">
+          <div class="proj-top">
+            <h3 class="proj-title">Instagram Clone</h3>
+            <span class="proj-meta">Jun 2025 — Jul 2025</span>
+          </div>
+          <p class="proj-desc">
+            Full-stack Instagram clone built with Flutter, Firebase Authentication and Cloud
+            Firestore — secure login, image uploads, likes, comments and profile management.
+            Efficient state management cut rendering latency by 20% on key screens, with
+            reusable, component-based widgets that keep the codebase maintainable.
+          </p>
+          <div class="proj-tags">
+            <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Firebase</span><span class="tag">State Management</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj" data-reveal>
+        <div class="proj-card">
+          <div class="proj-top">
+            <h3 class="proj-title">Wallpaper Hub</h3>
+            <span class="proj-meta">May 2025 — Jun 2025</span>
+          </div>
+          <p class="proj-desc">
+            Wallpaper app streaming 20,000+ wallpapers through the Pexels REST API, with
+            pagination and caching that cut API response latency by 30%. Lazy loading and
+            image caching keep scrolling smooth, and robust error handling with retry
+            mechanisms keeps the experience reliable on flaky networks.
+          </p>
+          <div class="proj-tags">
+            <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">REST API</span><span class="tag">Firebase</span><span class="tag">Git</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ ACHIEVEMENTS ============ -->
+  <section class="section" id="achievements">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="label sec-title">06 / Achievements</h2>
+        <span class="label sec-note">Beyond the code</span>
+      </div>
+      <div class="achieve-grid" data-reveal>
+        <div class="achieve-card">
+          <span class="achieve-num">150+</span>
+          <p class="achieve-label">DSA problems solved across LeetCode and GeeksforGeeks, covering Arrays, Trees, Graphs, Dynamic Programming, and Hashing.</p>
+        </div>
+        <div class="achieve-card">
+          <span class="achieve-num">📄</span>
+          <p class="achieve-label">Research paper on <em>Software Defect Prediction using ML Algorithms</em> — published at Iferp Academy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <span class="label" data-reveal>07 / Contact</span>
+      <h2 class="contact-big" data-reveal>
+        Let's build something<br>worth <em>scrolling</em>.
+      </h2>
+      <div data-reveal>
+        <div class="contact-row">
+          <a class="contact-cta" href="mailto:pandeyprabhav27@gmail.com">
+            pandeyprabhav27@gmail.com <span class="arr" aria-hidden="true">→</span>
+          </a>
+          <a class="contact-tel tabnum" href="tel:+919555122550">+91 95551 22550</a>
+        </div>
+      </div>
+      <div class="socials" data-reveal>
+        <a href="https://github.com/Prabhav275" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/prabhavpandey/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>© 2026 Prabhav Pandey — designed &amp; built by hand.</p>
+    <a class="back-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+
+  /* ---- theme toggle ---- */
+  var tt=document.getElementById('themeToggle');
+  function syncTheme(){
+    if(!tt)return;
+    tt.setAttribute('aria-pressed',root.getAttribute('data-theme')==='dark'?'true':'false');
+  }
+  try{
+    var t=localStorage.getItem('pf-theme');
+    if(t==='dark'||t==='light')root.setAttribute('data-theme',t);
+  }catch(e){}
+  syncTheme();
+  if(tt){
+    tt.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('pf-theme',next);}catch(e){}
+      syncTheme();
+    });
+  }
+
+  /* ---- split hero name into letters ---- */
+  var h1=document.getElementById('heroName');
+  if(h1){
+    var txt=h1.getAttribute('data-text')||h1.textContent.trim();
+    h1.setAttribute('aria-label',txt);
+    h1.textContent='';
+    var frag=document.createDocumentFragment();
+    for(var i=0;i<txt.length;i++){
+      var ch=txt.charAt(i);
+      var mask=document.createElement('span');
+      mask.className='split-mask';
+      var s=document.createElement('span');
+      s.className='split-char';
+      s.textContent=(ch===' ')?' ':ch;
+      mask.appendChild(s);
+      frag.appendChild(mask);
+    }
+    h1.appendChild(frag);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var chars=h1.querySelectorAll('.split-char');
+        for(var j=0;j<chars.length;j++){chars[j].style.transitionDelay=(j*36)+'ms';}
+        h1.classList.add('in');
+        var hero=h1.closest('.hero');
+        setTimeout(function(){
+          if(hero&&!hero.classList.contains('in'))hero.classList.add('in');
+        },120);
+      });
+    });
+  }
+
+  /* ---- nav scrolled state ---- */
+  var header=document.getElementById('siteHeader');
+  function onScroll(){
+    if(header)header.classList.toggle('scrolled',(window.scrollY||window.pageYOffset||0)>10);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  /* ---- scroll reveals ---- */
+  var rv=document.querySelectorAll('[data-reveal]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      for(var k=0;k<entries.length;k++){
+        var en=entries[k];
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      }
+    },{rootMargin:'0px 0px -8% 0px',threshold:0.05});
+    for(var m=0;m<rv.length;m++)io.observe(rv[m]);
+  }else{
+    for(var n=0;n<rv.length;n++)rv[n].classList.add('in');
+  }
+
+  /* ---- background starfield — scroll-evolves ---- */
+  var bgCanvas=document.getElementById('bgCanvas');
+  var bgCtx=bgCanvas?bgCanvas.getContext('2d'):null;
+  if(bgCanvas&&bgCtx&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var stars=[],planets=[],comet=null,bigStars=[],W=0,H=0,rafC=null,accent='216,166,87',ink='242,239,232',dpr=1,prevY=0,scrollP=0,time=0,cometTimer=200;
+
+    /* planet spec: normalized pos/radius + palettes + scroll orbit */
+    var PLANET_SPECS=[
+      {nx:0.14,ny:0.13,nr:0.075,ring:true,orb:0.17,orbSpeed:0.85,c1:'226,180,120',c2:'150,130,105'},
+      {nx:0.84,ny:0.2,nr:0.05,ring:false,orb:0.13,orbSpeed:-0.65,c1:'120,160,230',c2:'70,90,170'},
+      {nx:0.76,ny:0.8,nr:0.065,ring:false,orb:0.11,orbSpeed:1.1,c1:'170,140,210',c2:'95,70,150'}
+    ];
+    var BIG_SPECS=[
+      {nx:0.28,ny:0.3,tr:4.5},{nx:0.66,ny:0.6,tr:3.6},{nx:0.44,ny:0.72,tr:3},{nx:0.9,ny:0.5,tr:3.4}
+    ];
+
+    function readCols(){
+      var cs=getComputedStyle(document.documentElement);
+      function r(hex){
+        hex=(hex||'#000').replace('#','');if(hex.length===3)hex=hex.split('').map(function(c){return c+c}).join('');
+        return parseInt(hex.substr(0,2),16)+','+parseInt(hex.substr(2,2),16)+','+parseInt(hex.substr(4,2),16);
+      }
+      accent=r(cs.getPropertyValue('--accent'));
+      ink=r(cs.getPropertyValue('--ink'));
+    }
+    readCols();
+
+    var obs=new MutationObserver(function(){
+      if(document.documentElement.getAttribute('data-theme')){readCols();}
+    });
+    obs.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+    function countStars(){return Math.max(60,Math.min(200,Math.floor(W/8)));}
+    function spawnStar(randY,rndSize){
+      var z=0.3+Math.random()*0.7;
+      stars.push({
+        x:Math.random()*W,
+        y:randY?Math.random()*H:H+20,
+        r:rndSize?0.7+Math.random()*2:0.8+Math.random()*1.3,
+        z:z,
+        driftX:(Math.random()-0.5)*0.08,
+        driftY:-(0.02+Math.random()*0.08),
+        twinkle:0.15+Math.random()*0.5,
+        twinklePh:Math.random()*Math.PI*2,
+        baseAlpha:0.4+Math.random()*0.5,
+        sub:Math.random()<0.25
+      });
+    }
+    function fit(){
+      dpr=window.devicePixelRatio||1;
+      W=window.innerWidth;H=window.innerHeight;
+      bgCanvas.width=W*dpr;bgCanvas.height=H*dpr;
+      bgCanvas.style.width=W+'px';bgCanvas.style.height=H+'px';
+      bgCtx.setTransform(dpr,0,0,dpr,0,0);
+      var n=countStars();
+      while(stars.length>n){stars.pop();}
+      while(stars.length<n){spawnStar(true,true);}
+      var k;
+      for(k=0;k<PLANET_SPECS.length;k++){
+        if(!planets[k])planets[k]={ph:Math.random()*6.28};
+        planets[k].x=PLANET_SPECS[k].nx*W;
+        planets[k].y=PLANET_SPECS[k].ny*H;
+        planets[k].r=PLANET_SPECS[k].nr*Math.min(W,H);
+      }
+      for(k=0;k<BIG_SPECS.length;k++){
+        if(!bigStars[k])bigStars[k]={ph:Math.random()*6.28,ph2:Math.random()*6.28};
+        bigStars[k].x=BIG_SPECS[k].nx*W;
+        bigStars[k].y=BIG_SPECS[k].ny*H;
+        bigStars[k].tr=BIG_SPECS[k].tr*Math.min(W,H)/900;
+      }
+      if(!comet)comet={x:0,y:0,vx:0,vy:0,life:0,on:false,trail:[]};
+    }
+    function lerpRGB(a,b,t){
+      var aa=a.split(',').map(Number),bb=b.split(',').map(Number);
+      return Math.round(aa[0]+(bb[0]-aa[0])*t)+','+Math.round(aa[1]+(bb[1]-aa[1])*t)+','+Math.round(aa[2]+(bb[2]-aa[2])*t);
+    }
+    function shade(c,f){ /* f>0 lighten toward white, f<0 darken toward black */
+      var p=c.split(',').map(Number),o=[];
+      for(var i=0;i<3;i++){o[i]=f>=0?Math.round(p[i]+(255-p[i])*f):Math.round(p[i]*(1+f));}
+      return o[0]+','+o[1]+','+o[2];
+    }
+    function fireComet(){
+      comet.on=true;comet.life=0;comet.trail=[];
+      var fromLeft=Math.random()<0.5,fromTop=Math.random()<0.6;
+      if(fromTop){
+        comet.y=-20;
+        comet.x=W*(0.15+Math.random()*0.7);
+        comet.vx=(Math.random()<0.5?-1:1)*(0.35+Math.random()*0.4);
+        comet.vy=0.9+Math.random()*0.7;
+      }else{
+        comet.y=H*(0.2+Math.random()*0.5);
+        comet.x=fromLeft?-20:W+20;
+        comet.vx=(fromLeft?1:-1)*(0.8+Math.random()*0.5);
+        comet.vy=0.25+Math.random()*0.3;
+      }
+    }
+    function drawComet(){
+      if(comet.on){
+        comet.x+=comet.vx;comet.y+=comet.vy;comet.life++;
+        comet.trail.push({x:comet.x,y:comet.y});
+        if(comet.trail.length>60)comet.trail.shift();
+        var overX=comet.x<-140||comet.x>W+140,overY=comet.y<-140||comet.y>H+140;
+        if(overX||overY||comet.life>600){comet.on=false;comet.trail=[];cometTimer=260+Math.random()*420;}
+        var head='235,245,255';
+        for(var i=0;i<comet.trail.length;i++){
+          var f=i/comet.trail.length,seg=comet.trail[i];
+          bgCtx.globalAlpha=f*f*0.5;
+          bgCtx.fillStyle='rgb('+(f>0.6?head:lerpRGB('190,140,90',head,f))+')';
+          bgCtx.beginPath();
+          bgCtx.arc(seg.x,seg.y,Math.max(0.4,f*3.2),0,Math.PI*2);
+          bgCtx.fill();
+        }
+        bgCtx.globalAlpha=0.9;
+        bgCtx.shadowColor='rgba(235,245,255,0.9)';
+        bgCtx.shadowBlur=16;
+        bgCtx.fillStyle='rgb('+head+')';
+        bgCtx.beginPath();
+        bgCtx.arc(comet.x,comet.y,2.6,0,Math.PI*2);
+        bgCtx.fill();
+        bgCtx.shadowBlur=0;
+      }else{
+        cometTimer--;
+        if(cometTimer<=0)fireComet();
+      }
+      bgCtx.globalAlpha=1;
+    }
+    function drawBigStars(col){
+      for(var k=0;k<bigStars.length;k++){
+        var bs=bigStars[k],spec=BIG_SPECS[k];
+        bs.x=spec.nx*W+Math.sin(time*0.0002+bs.ph)*8;
+        bs.y=spec.ny*H+Math.cos(time*0.00016+bs.ph2)*6;
+        var glow=0.35+0.3*Math.sin(time*0.001+bs.ph);
+        var rr=bs.tr*(0.9+0.25*Math.sin(time*0.0012+bs.ph));
+        bgCtx.globalAlpha=glow;
+        bgCtx.shadowColor='rgba('+col+',0.8)';
+        bgCtx.shadowBlur=18;
+        bgCtx.fillStyle='rgb('+col+')';
+        bgCtx.beginPath();
+        bgCtx.arc(bs.x,bs.y,rr,0,Math.PI*2);
+        bgCtx.fill();
+        bgCtx.shadowBlur=0;
+        bgCtx.globalAlpha=glow*0.5;
+        var flare=rr*3.4;
+        bgCtx.fillRect(bs.x-flare/2,bs.y-0.6,flare,1.2);
+        bgCtx.fillRect(bs.x-0.6,bs.y-flare/2,1.2,flare);
+        bgCtx.globalAlpha=1;
+      }
+    }
+    function drawPlanet(p,spec,col,minDim){
+      var orbitA=p.ph+scrollP*spec.orbSpeed*Math.PI*2;
+      var orbR=spec.orb*minDim;
+      var cx=p.x+Math.cos(orbitA)*orbR+Math.sin(time*0.0003+p.ph)*6;
+      var cy=p.y+Math.sin(orbitA)*orbR*0.55+Math.cos(time*0.00024+p.ph*1.3)*5;
+      var R=p.r;
+
+      /* orbit ring */
+      bgCtx.globalAlpha=0.16;
+      bgCtx.strokeStyle='rgba('+col+',1)';
+      bgCtx.lineWidth=1;
+      bgCtx.setLineDash([2,6]);
+      bgCtx.beginPath();
+      bgCtx.ellipse(cx,cy,R*2.4,R*0.7,0,0,Math.PI*2);
+      bgCtx.stroke();
+      bgCtx.setLineDash([]);
+
+      /* soft glow */
+      var grd=bgCtx.createRadialGradient(cx,cy,R*0.4,cx,cy,R*2.2);
+      grd.addColorStop(0,'rgba('+col+',0.14)');
+      grd.addColorStop(1,'rgba('+col+',0)');
+      bgCtx.globalAlpha=1;
+      bgCtx.fillStyle=grd;
+      bgCtx.beginPath();
+      bgCtx.arc(cx,cy,R*2.2,0,Math.PI*2);
+      bgCtx.fill();
+
+      /* body gradient — lit from top-left */
+      var bg2=bgCtx.createRadialGradient(cx-R*0.4,cy-R*0.45,R*0.1,cx,cy,R);
+      bg2.addColorStop(0,'rgb('+shade(col,0.4)+')');
+      bg2.addColorStop(0.55,'rgb('+col+')');
+      bg2.addColorStop(1,'rgb('+shade(col,-0.55)+')');
+      bgCtx.globalAlpha=0.95;
+      bgCtx.fillStyle=bg2;
+      bgCtx.beginPath();
+      bgCtx.arc(cx,cy,R,0,Math.PI*2);
+      bgCtx.fill();
+
+      /* darker crescent on bottom edge for depth */
+      bgCtx.save();
+      bgCtx.globalAlpha=0.22;
+      bgCtx.fillStyle='rgb('+shade(col,-0.7)+')';
+      bgCtx.beginPath();
+      bgCtx.arc(cx,cy,R,0,Math.PI*2);
+      bgCtx.clip();
+      bgCtx.beginPath();
+      bgCtx.arc(cx+R*0.6,cy+R*0.15,R*1.5,0,Math.PI*2);
+      bgCtx.fill();
+      bgCtx.restore();
+
+      /* Saturn ring across */
+      if(spec.ring){
+        bgCtx.save();
+        bgCtx.translate(cx,cy);
+        bgCtx.rotate(-0.42);
+        bgCtx.globalAlpha=0.5;
+        bgCtx.fillStyle='rgba('+shade(col,0.15)+',0.9)';
+        bgCtx.scale(1,0.36);
+        bgCtx.beginPath();
+        bgCtx.arc(0,0,R*1.55,0,Math.PI*2);
+        bgCtx.fill();
+        bgCtx.globalAlpha=1;
+        bgCtx.restore();
+      }
+      bgCtx.globalAlpha=1;
+    }
+    function loop(){
+      bgCtx.clearRect(0,0,W,H);
+      time++;
+      var sy=window.scrollY||0,delta=sy-prevY;prevY=sy;
+      scrollP=sy/Math.max(1,(document.body.scrollHeight||1)-window.innerHeight);
+      scrollP=Math.min(1,Math.max(0,scrollP));
+
+      var warm='242,239,232',cool='160,200,255';
+      var col1=lerpRGB(warm,cool,scrollP);
+      var col2=lerpRGB(accent,'110,165,235',scrollP);
+
+      var minDim=Math.min(W,H);
+
+      /* nebula blobs — very faint, shift with scroll */
+      var nb=0.06+scrollP*0.05;
+      for(var b=0;b<3;b++){
+        var bx=W*(0.25+b*0.25+Math.sin(sy*0.0003+b*2)*0.1);
+        var by=H*(0.2+b*0.3+Math.cos(sy*0.0002+b*1.5)*0.15);
+        var grd=bgCtx.createRadialGradient(bx,by,0,bx,by,Math.min(W,H)*0.4);
+        var c=b===0?col2:(b===1?lerpRGB(accent,'130,150,230',scrollP*0.7):lerpRGB(warm,cool,scrollP*0.5));
+        grd.addColorStop(0,'rgba('+c+','+nb+')');
+        grd.addColorStop(1,'rgba('+c+',0)');
+        bgCtx.fillStyle=grd;
+        bgCtx.fillRect(0,0,W,H);
+      }
+
+      /* small stars */
+      for(var i=0;i<stars.length;i++){
+        var s=stars[i];
+        s.y+=s.driftY+s.z*delta*0.12;
+        s.x+=s.driftX+s.z*delta*0.04;
+        s.twinklePh+=s.twinkle*0.025;
+        if(s.y<-12||s.y>H+12||s.x<-12||s.x>W+12){s.x=Math.random()*W;s.y=0;}
+        var tw=0.5+0.5*Math.sin(s.twinklePh);
+        var alpha=s.baseAlpha*tw*(0.6+scrollP*0.4);
+        var col=s.sub?col2:col1;
+        var size=s.r+scrollP*0.7;
+        bgCtx.globalAlpha=alpha*0.7;
+        bgCtx.fillStyle='rgb('+col+')';
+        bgCtx.beginPath();
+        bgCtx.arc(s.x,s.y,size,0,Math.PI*2);
+        bgCtx.fill();
+        if(s.r>1.5){
+          bgCtx.shadowColor='rgba('+col+','+(alpha*0.3)+')';
+          bgCtx.shadowBlur=7;
+          bgCtx.fill();
+          bgCtx.shadowBlur=0;
+        }
+      }
+
+      /* planets (drawn after stars so they sit in front) */
+      for(var p2=0;p2<planets.length;p2++){
+        var spec=PLANET_SPECS[p2];
+        var pcol=lerpRGB(spec.c1,spec.c2,scrollP*0.5);
+        drawPlanet(planets[p2],spec,pcol,minDim);
+      }
+
+      /* big twinkling stars with cross flare */
+      drawBigStars(col1);
+
+      /* comet */
+      drawComet();
+
+      bgCtx.globalAlpha=1;
+      rafC=requestAnimationFrame(loop);
+    }
+    fit();
+    loop();
+    window.addEventListener('resize',function(){fit();});
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden&&rafC){cancelAnimationFrame(rafC);rafC=null;}
+      else if(!document.hidden&&!rafC){loop();}
+    });
+  }else if(bgCanvas){bgCanvas.style.display='none';}
+})();
+</script>
+</body>
+</html>
