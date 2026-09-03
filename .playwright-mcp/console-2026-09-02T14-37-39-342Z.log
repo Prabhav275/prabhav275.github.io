@@ -1,4 +1,0 @@
-[    5868ms] [WARNING] VIDEOJS: WARN: A plugin named "qualityLevels" already exists. You may want to avoid re-registering plugins! @ https://assets.awwwards.com/dist/js/7384.aa4162b5.js:1
-[  424986ms] [WARNING] VIDEOJS: WARN: A plugin named "qualityLevels" already exists. You may want to avoid re-registering plugins! @ https://assets.awwwards.com/dist/js/7384.aa4162b5.js:1
-[  431656ms] [ERROR] Not signed in with the identity provider. @ https://www.awwwards.com/websites/?text=portfolio:0
-[  433460ms] [ERROR] [GSI_LOGGER]: FedCM get() rejects with NetworkError: Error retrieving a token. @ https://accounts.google.com/gsi/client:87
