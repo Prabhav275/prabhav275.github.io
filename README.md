@@ -16,17 +16,9 @@ Minimal, classy portfolio website built with pure HTML, CSS, and JavaScript. Ins
 ### 🚀 Animations
 - **Split-letter hero** — staggered character reveal on load
 - **Scroll reveals** — IntersectionObserver-based fade-up transitions
-- **Space starfield background** — full-screen Canvas with:
-  - 200+ twinkling stars with parallax depth
-  - 3 planets on scroll-driven orbits with radial gradients & crescent shadows
-  - 1 Saturn-like planet with ring (transformed ellipse)
-  - 4 big stars with cross-flare sparkle
-  - Periodic comet with 60-point gradient trail
-  - 3 nebula color blobs that shift with scroll
-  - Colors evolve from warm amber → cool blue as you scroll
-- **Hover effects** — project cards, skill badges lift, experience rows shift
-- **Pulsing status dot** — illustrates availability
-- **Sweep line** on the scroll indicator
+- **Space starfield background** — full-screen Canvas with 200+ stars, 3 orbiting planets, 4 big stars with cross-flare, periodic comet, nebula color blobs, scroll-evolved color shift
+- **Hover effects** — lift, shift, underline transitions
+- **prefers-reduced-motion** fully respected
 
 ### 🧭 Sections
 | # | Section | Details |
@@ -34,7 +26,7 @@ Minimal, classy portfolio website built with pure HTML, CSS, and JavaScript. Ins
 | 01 | **About** | Bio, education, key stats |
 | 02 | **Experience** | Data Engineer @ Bluecopa, App Dev Intern @ Yhills |
 | 03 | **Education** | M.Tech & B.Tech @ Gautam Buddha University |
-| 04 | **Skills** | 19 colourful logo badges across Languages, Frameworks, Tools, Databases |
+| 04 | **Skills** | 19 colour logo badges across Languages, Frameworks, Tools, Databases |
 | 05 | **Projects** | Instagram Clone, Wallpaper Hub — with descriptions & tech tags |
 | 06 | **Achievements** | 150+ DSA problems, ML research paper |
 | 07 | **Contact** | Email, phone, GitHub, LinkedIn |
@@ -44,22 +36,21 @@ Minimal, classy portfolio website built with pure HTML, CSS, and JavaScript. Ins
 - **Canvas API** — custom starfield, planets, comet rendering
 - **CSS Custom Properties** — full theme token system
 - **IntersectionObserver** — scroll-triggered reveals
-- **prefers-reduced-motion** — fully respected
 - **Google Fonts** — Syne, Instrument Sans, JetBrains Mono
 - **SVG** — inline brand logos for skills
 
 ### 📁 File Structure
 ```
-portfolio.html   — main source file
-index.html       — copy of portfolio.html for GitHub Pages
+index.html       — main HTML structure
+css/style.css    — all styles (theme tokens, layout, responsive)
+js/script.js     — animations, theme toggle, scroll reveals, space background
 ```
 
-## 🚀 Quick Start
+### 🚀 Quick Start
 ```bash
 # Serve locally
 python3 -m http.server 8080
-# Open http://localhost:8080/portfolio.html
-# Or use the live link: https://prabhav275.github.io/portfolio/
+# Open http://localhost:8080/
 ```
 
 ## 📬 Contact
