@@ -2,7 +2,7 @@
 
 Minimal, classy portfolio website built with pure HTML, CSS, and JavaScript. Inspired by awwwards-winning animation design and the Paul Kalkbrenner aesthetic.
 
-**🌐 Live:** [https://prabhav275.github.io/portfolio/](https://prabhav275.github.io/portfolio/)
+**🌐 Live:** [https://prabhav275.github.io/](https://prabhav275.github.io/)
 
 ## ✨ Features
 
@@ -10,7 +10,7 @@ Minimal, classy portfolio website built with pure HTML, CSS, and JavaScript. Ins
 - **Dark-first theme** with warm amber accent palette
 - **Light/Dark mode toggle** — persists via localStorage, respects system preference
 - **Subtle grain texture** overlay for depth
-- **Responsive layout** — mobile, tablet, desktop
+- **Responsive layout** — mobile (480px), tablet (760px), laptop (1024px), desktop
 - **JetBrains Mono** for labels, **Syne** for display, **Instrument Sans** for body
 
 ### 🚀 Animations

@@ -269,11 +269,55 @@ footer{border-top:1px solid var(--line)}
 }
 
 /* ============ responsive ============ */
-@media (max-width:760px){
+
+/* tablets & small laptops */
+@media (max-width:1024px){
   .about-grid{grid-template-columns:1fr}
+  .achieve-grid{grid-template-columns:repeat(2,1fr)}
+  .skill-grid{grid-template-columns:repeat(auto-fill,minmax(74px,1fr))}
+}
+
+/* phones landscape & small tablets */
+@media (max-width:760px){
   .sec-head{flex-direction:column;align-items:flex-start;gap:8px}
   .sec-note{text-align:left}
   .nav-links .hide-m{display:none}
   .hero-name{font-size:clamp(1.9rem,9.5vw,3.4rem)}
-  .skill-grid{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}
+  .hero{padding-top:100px;padding-bottom:48px}
+  .section{padding:clamp(56px,9vh,100px) 0}
+  .contact-row{flex-direction:column;align-items:stretch}
+  .contact-cta{justify-content:center}
+  .contact-tel{text-align:center}
+  .exp-card:hover,.edu-row:hover,.proj-card:hover{padding-left:10px}
+  .achieve-grid{grid-template-columns:1fr}
+}
+
+/* small phones */
+@media (max-width:480px){
+  .hero-name{font-size:clamp(1.7rem,11vw,2.6rem)}
+  .hero{padding-top:88px;padding-bottom:36px}
+  .hero-meta{flex-direction:column;gap:10px}
+  .hero-top{flex-direction:column;gap:6px}
+  .hero-scroll{display:none}
+  .section{padding:clamp(44px,7vh,80px) 0}
+  .wrap{padding:0 clamp(16px,4vw,32px)}
+  .skill-grid{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px}
+  .skill{padding:14px 6px 10px}
+  .skill-badge{width:40px;height:40px}
+  .contact-big{font-size:clamp(1.8rem,8vw,3.2rem)}
+  .statement{font-size:clamp(1.25rem,5vw,1.8rem)}
+  .proj-title{font-size:clamp(1.2rem,5vw,1.6rem)}
+  .edu-row{flex-direction:column;gap:6px}
+  .exp-top{flex-direction:column;gap:4px}
+  .achieve-card{padding:20px 18px}
+  .achieve-num{font-size:clamp(1.5rem,6vw,2rem)}
+  .nav{height:60px}
+  .brand{font-size:.92rem}
+  .nav-links a{font-size:.68rem}
+  .theme-btn{width:30px;height:30px;font-size:.85rem}
+  .contact-cta{padding:14px 24px;font-size:.9rem}
+  .contact-tel{padding:12px 20px;font-size:.72rem}
+  .chip{font-size:.6rem;padding:4px 10px}
+  .tag{font-size:.6rem;padding:3px 9px}
+  .label{font-size:.66rem}
 }
