@@ -2,6 +2,8 @@
 
 Minimal, classy portfolio website built with pure HTML, CSS, and JavaScript. Inspired by awwwards-winning animation design and the Paul Kalkbrenner aesthetic.
 
+**🌐 Live:** [https://prabhav275.github.io/portfolio/](https://prabhav275.github.io/portfolio/)
+
 ## ✨ Features
 
 ### 🎨 Design
@@ -45,11 +47,11 @@ Minimal, classy portfolio website built with pure HTML, CSS, and JavaScript. Ins
 - **prefers-reduced-motion** — fully respected
 - **Google Fonts** — Syne, Instrument Sans, JetBrains Mono
 - **SVG** — inline brand logos for skills
-- **GitHub Pages** — ready for deployment
 
 ### 📁 File Structure
 ```
-portfolio.html   — entire site (single file, ~975 lines)
+portfolio.html   — main source file
+index.html       — copy of portfolio.html for GitHub Pages
 ```
 
 ## 🚀 Quick Start
@@ -57,6 +59,7 @@ portfolio.html   — entire site (single file, ~975 lines)
 # Serve locally
 python3 -m http.server 8080
 # Open http://localhost:8080/portfolio.html
+# Or use the live link: https://prabhav275.github.io/portfolio/
 ```
 
 ## 📬 Contact
